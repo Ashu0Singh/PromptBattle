@@ -8,99 +8,101 @@ import { useParams } from "react-router-dom";
 
 function GenerateImg() {
   const [isGenerated, setIsGenerated] = useState(false);
-  const [isLoading, setIsLoading] = useState("Submit");
-  const { teamId } = useParams();
+	const [isLoading, setIsLoading] = useState("Submit");
+	const { teamId } = useParams();
 
-  const [info, setInfo] = useState({
-    prompt: "",
-  });
-  const [selectedURL, setSelectedURL] = useState("");
-  const [imgURL, setImgURL] = useState([]);
+	const [info, setInfo] = useState({
+		prompt: "",
+	});
+	const [selectedURL, setSelectedURL] = useState("");
+	const [imgURL, setImgURL] = useState([]);
 
-  function handleChange({ target: { name, value } }) {
-    setInfo((prevValue) => ({ ...prevValue, [name]: value }));
-    console.log(value);
-  }
+	function handleChange({ target: { name, value } }) {
+		setInfo((prevValue) => ({ ...prevValue, [name]: value }));
+		console.log(value);
+	}
 
-  const handleSubmit = (selectedURL, id) => {
-    const url =
-      `${process.env.REACT_APP_URL}/api/submission`;
-    axios
-      .post(url, {
-        id,
-        img: selectedURL,
-      })
-      .then((res) => {
-        console.log(res.data);
-      });
-  };
+	const handleSubmit = (selectedURL, id) => {
+		const url = `${
+			process.env.REACT_APP_NODE_ENV === "DEVELOPMENT"
+				? process.env.REACT_APP_DEV_URL
+				: process.env.REACT_APP_PRODUCTION_URL
+		}/api/submission`;
+		axios
+			.post(url, {
+				id,
+				img: selectedURL,
+			})
+			.then((res) => {
+				console.log(res.data);
+			});
+	};
 
-  const generateImg = async () => {
-    setIsLoading("");
-    const url =
-    `${process.env.REACT_APP_URL}/api/images/generations`;
-    await axios
-      .post(url, {
-        prompt: info.prompt,
-      })
-      .then((res) => {
-        if (!res.data.error) {
-          console.log(res.data.images.data);
-          setImgURL(res.data.images.data);
-        } else {
-          console.log("This Prompt Violate terms and condition of Dall e");
-        }
-      });
+	const generateImg = async () => {
+		setIsLoading("");
+		const url = `${process.env.REACT_APP_URL}/api/images/generations`;
+		await axios
+			.post(url, {
+				prompt: info.prompt,
+			})
+			.then((res) => {
+				if (!res.data.error) {
+					console.log(res.data.images.data);
+					setImgURL(res.data.images.data);
+				} else {
+					console.log(
+						"This Prompt Violate terms and condition of Dall e"
+					);
+				}
+			});
 
-    setIsGenerated(true);
+		setIsGenerated(true);
 
-    if (isGenerated) {
-      setIsLoading("Submitted");
-    } else {
-      setIsLoading("Retry");
-    }
-  };
+		if (isGenerated) {
+			setIsLoading("Submitted");
+		} else {
+			setIsLoading("Retry");
+		}
+	};
 
-  if (!(selectedURL === "")) {
-    handleSubmit(selectedURL, teamId);
-  }
+	if (!(selectedURL === "")) {
+		handleSubmit(selectedURL, teamId);
+	}
 
-  if (teamId === undefined) {
-    return (
-      <Wrapper>
-        <div className="flex-col borders">
-          <h1 className="fc-white title">{" >Image Generation "}</h1>
-          <div
-            className="fs-400 fc-white extrabold flex-col poll"
-            style={{ height: "100%", justifyContent: "center" }}
-          >
-            Please contact the Event Managment Team for Login
-          </div>
-        </div>
-      </Wrapper>
-    );
-  }
-  return (
-    <Wrapper>
-      (
-      {!isGenerated && (
-        <div className="flex-col borders">
-          <h1 className="fc-white title">{" >Image Generation "}</h1>
-          <div className="flex-col fc-white imgGen">
-            <div className="form-floating mb-5">
-              <textarea
-                className="form-control inputFeilds"
-                placeholder="Enter your prompt here"
-                rows="5"
-                col="10"
-                charswidth="23"
-                id="floatingTextarea"
-                name="prompt"
-                onChange={handleChange}
-              ></textarea>
-              <label for="floatingTextarea">Prompt</label>
-            </div>
-            {/* <div className="d-grid mb-2">
+	if (teamId === undefined) {
+		return (
+			<Wrapper>
+				<div className="flex-col borders">
+					<h1 className="fc-white title">{" >Image Generation "}</h1>
+					<div
+						className="fs-400 fc-white extrabold flex-col poll"
+						style={{ height: "100%", justifyContent: "center" }}>
+						Please contact the Event Managment Team for Login
+					</div>
+				</div>
+			</Wrapper>
+		);
+	}
+	return (
+		<Wrapper>
+			(
+			{!isGenerated && (
+				<div className="flex-col borders">
+					<h1 className="fc-white title">{" >Image Generation "}</h1>
+					<div className="flex-col fc-white imgGen">
+						<div className="form-floating mb-5">
+							<textarea
+								className="form-control inputFeilds"
+								placeholder="Enter your prompt here"
+								rows="5"
+								col="10"
+								charswidth="23"
+								id="floatingTextarea"
+								name="prompt"
+								onChange={handleChange}></textarea>
+							<label for="floatingTextarea">Prompt</label>
+						</div>
+						{/* <div className="d-grid mb-2">
               <button
                 className="button fs-200 fc-white extrabold"
                 onClick={generateImg}
@@ -108,33 +110,31 @@ function GenerateImg() {
                 Generate
               </button>
             </div> */}
-            <button
-              className="button fs-50 extrabold fc-white"
-              onClick={() => {
-                if (!(info.prompt === "")) {
-                  generateImg();
-                }
-              }}
-            >
-              {isLoading === "" ? (
-                <span
-                  className="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              ) : (
-                isLoading
-              )}
-            </button>
-          </div>
-        </div>
-      )}
-      {isGenerated && (
-        <DisplayImg imgURL={imgURL} setSelectedURL={setSelectedURL} />
-      )}
-      )
-    </Wrapper>
-  );
+						<button
+							className="button fs-50 extrabold fc-white"
+							onClick={() => {
+								if (!(info.prompt === "")) {
+									generateImg();
+								}
+							}}>
+							{isLoading === "" ? (
+								<span
+									className="spinner-border spinner-border-sm"
+									role="status"
+									aria-hidden="true"></span>
+							) : (
+								isLoading
+							)}
+						</button>
+					</div>
+				</div>
+			)}
+			{isGenerated && (
+				<DisplayImg imgURL={imgURL} setSelectedURL={setSelectedURL} />
+			)}
+			)
+		</Wrapper>
+	);
 }
 
 export default GenerateImg;
