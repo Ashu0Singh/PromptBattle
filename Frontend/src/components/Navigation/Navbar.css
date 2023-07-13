@@ -4,7 +4,7 @@
 	height: 100vh;
 	align-items: center;
 	padding-block: 1rem;
-	justify-content: space-evenly;
+	justify-content: space-around;
 	backdrop-filter: blur(10px);
 }
 
@@ -19,6 +19,7 @@
 
 .navBar-hamMenuLabels {
 	display: none;
+	margin-inline: auto;
 }
 
 .navBar-iconTray {
@@ -36,7 +37,6 @@
 		display: block;
 		background-color: transparent;
 		border: none;
-		background-color: red;
 	}
 	.navBar {
 		width: 100%;
@@ -69,7 +69,11 @@
 	.navBar-hamMenuLabels {
 		display: block;
 		text-align: center;
-		border-bottom: rgba(231, 231, 234, 0.46);
+	}
+	.nav-links {
+		width: max-content;
+        padding: 0.1rem 0.3rem;
+		border-bottom: solid 1px rgba(231, 231, 234, 0.46);
 	}
 }
 

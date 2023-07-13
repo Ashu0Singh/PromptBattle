@@ -185,7 +185,7 @@ body,
 	border: none;
 	padding: 1rem 2rem;
 	width: fit-content;
-	border-radius: 10px;
+	border-radius: 5px;
 	margin-inline: auto;
 	transition-duration: 250ms;
 }

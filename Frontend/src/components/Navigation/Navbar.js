@@ -1,10 +1,11 @@
 import './Navbar.css';
-import React,{ useState } from 'react';
+import React,{ useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Context } from '../../util/context';
 
-export default function Navbar(){
+export default function Navbar() {
+    const { isLoggedIn, setIsLoggedIn , userName} = useContext(Context);
 
-    const [isLoggedIn , setIsLoggedIn] = useState(true);
     const [hamRotation , setHamRotation] = useState(
         { 
             width:"20px",
@@ -18,18 +19,15 @@ export default function Navbar(){
     const hamburgerMenu = () => {
         if(!isVisible){
             setHamb({
-                height: "40vh"
+                height: "32vh"
             })
-            console.log(hamRotation)
             setHamRotation(prevVal =>({...prevVal, transform:`rotate(180deg)`}));
         }else{
             setHamb({
                 height: "0px"
             });
-            console.log(hamRotation)
             setHamRotation(prevVal =>({...prevVal, transform:`rotate(0deg)`}));
         }
-        console.log(isVisible);
         setisVisible(prevVal => !prevVal);
     }
 
@@ -49,7 +47,7 @@ export default function Navbar(){
             </div>
             <div style={hamB} className='navBar-hamMenu flex-col'>
                 <div className='navBar-iconTray flex-col'>
-                    <Link to='/Prompt-Battle/Homepage'>
+                    <Link to='/Prompt-Battle/Homepage' className="nav-links">
                         <img className='navIcons' style={{ 
                                 width:"30px",
                                 height:"30px"
@@ -61,7 +59,7 @@ export default function Navbar(){
                     </Link>
 
                     {/* <Link to='/Prompt-Battle/GenerateImage'> */}
-                    <Link to='/Prompt-Battle/'>
+                    <Link to='/Prompt-Battle/' className="nav-links">
                         <img className='navIcons' style={{ 
                                 width:"30px",
                                 height:"30px"
@@ -72,7 +70,7 @@ export default function Navbar(){
                         <p className='navBar-hamMenuLabels fc-white fs-200'>Generate Image</p> 
                     </Link>
                     
-                    <Link to='/Prompt-Battle/Leaderboard'>
+                    <Link to='/Prompt-Battle/Leaderboard' className="nav-links">
                         <img className='navIcons' style={{ 
                                 width:"30px",
                                 height:"30px"
@@ -83,7 +81,7 @@ export default function Navbar(){
                         <p className='navBar-hamMenuLabels fc-white '>Leaderboard</p>
                     </Link>
 
-                    <Link to='/Prompt-Battle/Polling'>
+                    <Link to='/Prompt-Battle/Polling' className="nav-links">
                         <img className='navIcons' style={{ 
                                 width:"30px",
                                 height:"30px"
@@ -106,7 +104,7 @@ export default function Navbar(){
                             src={process.env.PUBLIC_URL + "/assests/icons/Team Icon.png"} 
                         />
                         <h2 className='fc-white fs-400 medium'>
-                            CapyBara
+                            {userName}
                         </h2>
                     </div> :
                     <Link to='/Prompt-Battle/Login'>
