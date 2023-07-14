@@ -7,7 +7,7 @@ import DisplayImg from "../DisplayImg/DisplayImg";
 import { useParams } from "react-router-dom";
 
 function GenerateImg() {
-  const [isGenerated, setIsGenerated] = useState(false);
+	const [isGenerated, setIsGenerated] = useState(false);
 	const [isLoading, setIsLoading] = useState("Submit");
 	const { teamId } = useParams();
 

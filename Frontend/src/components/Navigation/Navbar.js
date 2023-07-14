@@ -47,7 +47,7 @@ export default function Navbar() {
             </div>
             <div style={hamB} className='navBar-hamMenu flex-col'>
                 <div className='navBar-iconTray flex-col'>
-                    <Link to='/Prompt-Battle/Homepage' className="nav-links">
+                    <Link to='/PromptBattle' className="nav-links">
                         <img className='navIcons' style={{ 
                                 width:"30px",
                                 height:"30px"
@@ -58,8 +58,8 @@ export default function Navbar() {
                         <p className='navBar-hamMenuLabels fc-white '>Homepage</p>
                     </Link>
 
-                    {/* <Link to='/Prompt-Battle/GenerateImage'> */}
-                    <Link to='/Prompt-Battle/' className="nav-links">
+                    {/* <Link to='/PromptBattle/GenerateImage'> */}
+                    <Link to='/PromptBattle/' className="nav-links">
                         <img className='navIcons' style={{ 
                                 width:"30px",
                                 height:"30px"
@@ -70,7 +70,7 @@ export default function Navbar() {
                         <p className='navBar-hamMenuLabels fc-white fs-200'>Generate Image</p> 
                     </Link>
                     
-                    <Link to='/Prompt-Battle/Leaderboard' className="nav-links">
+                    <Link to='/PromptBattle/Leaderboard' className="nav-links">
                         <img className='navIcons' style={{ 
                                 width:"30px",
                                 height:"30px"
@@ -81,7 +81,7 @@ export default function Navbar() {
                         <p className='navBar-hamMenuLabels fc-white '>Leaderboard</p>
                     </Link>
 
-                    <Link to='/Prompt-Battle/Polling' className="nav-links">
+                    <Link to='/PromptBattle/Polling' className="nav-links">
                         <img className='navIcons' style={{ 
                                 width:"30px",
                                 height:"30px"
@@ -107,7 +107,7 @@ export default function Navbar() {
                             {userName}
                         </h2>
                     </div> :
-                    <Link to='/Prompt-Battle/Login'>
+                    <Link to='/PromptBattle/Login'>
                         <button 
                             className='button fs-100 extrabold fc-white' 
                             style={{padding:"0.6rem 1.4rem"}}
@@ -156,7 +156,7 @@ export default function Navbar() {
 //     return(
 //         <div className='navBar flex-col'>
 //             <div className='navBar-top flex-col'>
-//                 <Link to='/Prompt-Battle/'>
+//                 <Link to='/PromptBattle/'>
 //                     <h1 className='navBar-title fc-white fs-400 bold'>
 //                         _prompt battle
 //                     </h1>
@@ -170,7 +170,7 @@ export default function Navbar() {
 //                 </button>
 //             </div>
 //             <div style={hamB} className='navBar-hamMenu navBar-iconTray flex-col'>
-//                     <Link to='/Prompt-Battle/'>
+//                     <Link to='/PromptBattle/'>
 //                         <img className='navIcons' style={{ 
 //                                 width:"30px",
 //                                 height:"30px"
@@ -181,7 +181,7 @@ export default function Navbar() {
 //                         <p className='navBar-hamMenuLabels fc-white '>Homepage</p>
 //                     </Link>
 
-//                     <Link to='/Prompt-Battle/GenerateImage'>
+//                     <Link to='/PromptBattle/GenerateImage'>
 //                         <img className='navIcons' style={{ 
 //                                 width:"30px",
 //                                 height:"30px"
@@ -192,7 +192,7 @@ export default function Navbar() {
 //                         <p className='navBar-hamMenuLabels fc-white fs-200'>Generate Image</p> 
 //                     </Link>
                     
-//                     <Link to='/Prompt-Battle/Leaderboard'>
+//                     <Link to='/PromptBattle/Leaderboard'>
 //                         <img className='navIcons' style={{ 
 //                                 width:"30px",
 //                                 height:"30px"
@@ -203,7 +203,7 @@ export default function Navbar() {
 //                         <p className='navBar-hamMenuLabels fc-white '>Leaderboard</p>
 //                     </Link>
 
-//                     <Link to='/Prompt-Battle/Polling'>
+//                     <Link to='/PromptBattle/Polling'>
 //                         <img className='navIcons' style={{ 
 //                                 width:"30px",
 //                                 height:"30px"
