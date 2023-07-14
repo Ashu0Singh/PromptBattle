@@ -16,6 +16,12 @@ const handleRefreshToken = async (req, res) => {
 
 	const user = await User.findOne({ refreshToken: refreshToken });
 
+	if (!user) {
+		return res.status(403).json({
+			message: "Forbidden User",
+		});
+	}
+
 	if (!cookies?.jwt) {
 		return res.status(403).json({
 			message: "Forbidden User",

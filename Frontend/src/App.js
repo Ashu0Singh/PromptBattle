@@ -10,8 +10,8 @@ function App() {
 		<AppContext>
 			<Router className="App">
 				<Routes>
-					<Route exect path="/PromptBattle/" element={<Login />} />
 					<Route exact path="/PromptBattle/" element={<Homepage />} />
+					<Route exect path="/PromptBattle/Login" element={<Login />} />
 					<Route
 						exact
 						path="/PromptBattle/GenerateImage/:teamId"
