@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import GenerateImg from "./components/Image Generation/ImageGen";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
 import AppContext from "./util/context";
+import Register from "./components/Register/Register";
 function App() {
 	return (
 		<AppContext>
@@ -12,6 +13,7 @@ function App() {
 				<Routes>
 					<Route exact path="/PromptBattle/" element={<Homepage />} />
 					<Route exect path="/PromptBattle/Login" element={<Login />} />
+					<Route exect path="/PromptBattle/Register" element={<Register />} />
 					<Route
 						exact
 						path="/PromptBattle/GenerateImage/:teamId"

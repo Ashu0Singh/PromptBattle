@@ -183,7 +183,7 @@ body,
 .button {
 	background-color: #3888ff;
 	border: none;
-	padding: 1rem 2rem;
+	padding: 0.7rem 1.4rem;
 	width: fit-content;
 	border-radius: 5px;
 	margin-inline: auto;
@@ -217,7 +217,7 @@ body,
 		z-index: -10;
 	}
 	.container {
-		padding: 0.8rem;
+		padding: 0.8rem 1rem;
 		width: 85%;
 	}
 }

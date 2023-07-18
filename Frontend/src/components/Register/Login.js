@@ -1,5 +1,6 @@
 import './Login.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 import Wrapper from '../Wrapper/Wrapper'
 import { useState } from 'react'
 import Axios from 'axios'
@@ -7,38 +8,20 @@ import Axios from 'axios'
 export default function Login(){
 
     const [classNames , setClassName] = useState(['','','','']);
-    const [isLoading , setIsLoading] = useState('Submit');
+    const [isLoading , setIsLoading] = useState('Login');
 
 
     const [input , setInput ] = useState(
         {
-            name:'',
-            team_name:'',
-            api_key:'',
-            security_code:''
+            email:'',
+            password:'',
         }
     );
 
 
     function handleSubmit(){
         setIsLoading('');
-        Axios.post(
-            "http://3.6.65.227:8080/api/login",
-            {
-                "name":`${input.name}`,
-                "team_name":`${input.team_name}`,
-                "api_key":`${input.api_key}`,
-                "security_code":`${input.security_code}`
-            }
-        ).then(({data:{isLoggedIn , message}, status}) => {
-            if(status === 200 && isLoggedIn){
-                setIsLoading("Submitted");
-            }else{
-                setIsLoading("Retry")
-            }
-        });
     }
-
 
     function handleChange({target :{ name , value}}){
         setInput(prevValue => ({...prevValue,[name]:value}))
@@ -51,52 +34,31 @@ export default function Login(){
                 <div className='login flex-col'>
                     <div className="form-floating">
                         <input 
-                            type="text" 
+                            type="email" 
                             id='floatingName' 
                             onChange={handleChange} 
                             className={`form-control inputFeilds ${classNames[0]}`} 
-                            placeholder="Vinay"
-                            name='name'
-                            value={input.name}
+                            placeholder="Email"
+                            name='email'
+                            value={input.email}
                         />
-                        <label htmlFor="floatingName">Name</label>
-                    </div>
-                    <div className="form-floating">
-                        <input 
-                            type="text" 
-                            id='floatingInput' 
-                            onChange={handleChange} 
-                            className={`form-control inputFeilds ${classNames[1]}`} 
-                            placeholder="Cute Capybara"
-                            name='team_name'
-                            value={input.team_name}
-                        />
-                        <label htmlFor="floatingInput">Team Name</label>
-                    </div>
-                    <div className="form-floating">
-                        <input 
-                            type="text" 
-                            id="floatingAPI" 
-                            onChange={handleChange} 
-                            className={`form-control inputFeilds ${classNames[2]}`} 
-                            placeholder="xxxxxxxxxxxx"
-                            name='api_key'
-                            value={input.api_key}
-                        />
-                        <label htmlFor="floatingAPI">API Key</label>
+                        <label htmlFor="floatingName">Email</label>
                     </div>
                     <div className="form-floating">
                         <input 
                             type="password" 
-                            id='floatingCode' 
+                            id='floatingInput' 
                             onChange={handleChange} 
-                            className={`form-control inputFeilds ${classNames[3]}`} 
-                            placeholder="234209"
-                            name='security_code'
-                            value={input.security_code}
+                            className={`form-control inputFeilds ${classNames[1]}`} 
+                            placeholder="Password"
+                            name='password'
+                            value={input.password}
                         />
-                        <label htmlFor="floatingCode">Security Code</label>
+                        <label htmlFor="floatingInput">Password</label>
                     </div>
+                    <div className="link">
+						Don't have an account? <Link to="/PromptBattle/Register">Register</Link>
+					</div>
                     <button className='button fs-50 extrabold fc-white' onClick={handleSubmit}>
                         {isLoading === "" ? 
                         <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 
