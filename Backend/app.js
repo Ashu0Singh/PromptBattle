@@ -38,6 +38,7 @@ app.use('/image', image);
 
 // App Start
 const PORT = process.env.PORT || 8080;
+// Make sure to whitelist your ip before trying to access the mongo cluster
 
 try {
 	mongoose

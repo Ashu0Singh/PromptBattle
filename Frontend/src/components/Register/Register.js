@@ -16,18 +16,7 @@ export default function Register() {
 	});
 
 	function handleSubmit() {
-		setIsLoading("");
-		Axios.post("http://3.6.65.227:8080/user/register", {
-			username: `${input.username}`,
-			email: `${input.email}`,
-			password: `${input.password}`,
-		}).then(({ data: { isLoggedIn, message }, status }) => {
-			if (status === 200 && isLoggedIn) {
-				setIsLoading("Submitted");
-			} else {
-				setIsLoading("Retry");
-			}
-		});
+		
 	}
 
 	function handleChange({ target: { name, value } }) {
