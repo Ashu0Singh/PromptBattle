@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const PollingSchema = new mongoose.Schema({
     userName: String,
-    votes: Number,
+    email: String,
     image: String
 }, { timestamp: true });
 

@@ -24,6 +24,16 @@ const Image = {
 			res.status(500).json({ message: "Internal server error" });
 		}
 	},
+	async submit(req, res) {
+		const { imageUrl } = req.body;
+		const user = req.user;
+
+		
+
+		res.status(200).json({
+			message : "Submitted"
+		});
+	}
 };
 
 module.exports = Image;

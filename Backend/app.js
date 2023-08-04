@@ -11,6 +11,7 @@ const cookieParser = require("cookie-parser");
 const leaderboard = require("./routes/leaderboard.js");
 const user = require('./routes/user.js');
 const image = require('./routes/images.js');
+const verifyJWT = require("./middleware/verifyJWT.js");
 
 // Configuration Updates
 dotenv.config();
@@ -23,23 +24,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
 	cors({
-		origin: process.env.ALLOWED_URL || "*",
+		origin: "*",
 	})
 );
 app.use(morgan(":method :url Status - :status - :response-time ms :date[web]"));
 
 
 // Routes Setup
-app.use('/leaderboard', leaderboard);
 app.use('/user', user);
+
+app.use(verifyJWT)
+app.use('/leaderboard', leaderboard);
 app.use('/image', image);
 
 
 
 // App Start
 const PORT = process.env.PORT || 8080;
-// Make sure to whitelist your ip before trying to access the mongo cluster
 
+// Make sure to whitelist your ip before trying to access the mongo cluster
 try {
 	mongoose
 		.connect(process.env.MONGO_URL, {

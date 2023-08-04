@@ -91,11 +91,11 @@ const UserData = {
 				}
 			);
 
-			res.cookie("jwt", refreshToken, {
-				httpOnly: true,
-				maxAge: 1000,
-			});
-			res.status(200).json({ accessToken, message: "Login Successful" });
+			// res.cookie("jwt", refreshToken, {
+			// 	httpOnly: true,
+			// 	maxAge: 1000,
+			// });
+			res.status(200).json({ accessToken, refreshToken, message: "Login Successful" });
 		} else {
 			res.status(400).json({
 				message: "Email or Password is not valid",

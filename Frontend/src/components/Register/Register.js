@@ -3,7 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Wrapper from "../Wrapper/Wrapper";
 import { useState } from "react";
-import Axios from "axios";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export default function Register() {
 	const [classNames, setClassName] = useState(["", "", ""]);
@@ -15,9 +16,24 @@ export default function Register() {
 		password: "",
 	});
 
-	function handleSubmit() {
-		
-	}
+	const handleSubmit = async () => {
+		try {
+			await axios.post(
+				(process.env.REACT_APP_NODE_ENV == "DEVELOPMENT"
+					? process.env.REACT_APP_DEV_URL
+					: process.env.REACT_APP_PRODUCTION_URL)+"/user/register",
+				input
+			).then((response) => {
+				if (response.status == 200)
+					toast.success(response.data.message);
+				else
+					toast.error(response.data.message);
+			});
+		}
+		catch (error) {
+			toast.error("There's has been a problem on our side");
+		}
+	};
 
 	function handleChange({ target: { name, value } }) {
 		setInput((prevValue) => ({ ...prevValue, [name]: value }));
@@ -35,8 +51,8 @@ export default function Register() {
 							type="text"
 							id="floatingName"
 							onChange={handleChange}
-                            className={`form-control inputFeilds ${classNames[0]}`}
-                            placeholder="Username"
+							className={`form-control inputFeilds ${classNames[0]}`}
+							placeholder="Username"
 							name="username"
 							value={input.username}
 						/>
@@ -47,8 +63,8 @@ export default function Register() {
 							type="email"
 							id="floatingInput"
 							onChange={handleChange}
-                            className={`form-control inputFeilds ${classNames[1]}`}
-                            placeholder="Email"
+							className={`form-control inputFeilds ${classNames[1]}`}
+							placeholder="Email"
 							name="email"
 							value={input.email}
 						/>
@@ -60,14 +76,15 @@ export default function Register() {
 							id="floatingCode"
 							onChange={handleChange}
 							className={`form-control inputFeilds ${classNames[2]}`}
-                            placeholder="Password"
+							placeholder="Password"
 							name="password"
 							value={input.password}
 						/>
 						<label htmlFor="floatingCode">Password</label>
 					</div>
 					<div className="link">
-						Already have an account? <Link to="/PromptBattle/Login">Login</Link>
+						Already have an account?{" "}
+						<Link to="/PromptBattle/Login">Login</Link>
 					</div>
 					<button
 						className="button fs-50 extrabold fc-white"
