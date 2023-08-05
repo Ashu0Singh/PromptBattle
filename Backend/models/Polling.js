@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 
 const PollingSchema = new mongoose.Schema({
-    userName: String,
+    username: String,
     email: String,
+    votedBy: Array,
     image: String
 }, { timestamp: true });
 
 const Polling = mongoose.model('Polling', PollingSchema);
 
-module.exports = User;
+module.exports = Polling;

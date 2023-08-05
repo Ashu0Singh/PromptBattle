@@ -1,4 +1,5 @@
 const { Configuration, OpenAIApi } = require("openai");
+const Polling = require('../models/Polling');
 require("dotenv").config();
 const Image = {
 	async generate(req, res) {
@@ -28,11 +29,27 @@ const Image = {
 		const { imageUrl } = req.body;
 		const user = req.user;
 
-		
-
-		res.status(200).json({
-			message : "Submitted"
-		});
+		try {
+			await Polling.create({
+				username: user.username,
+				email: user.email,
+				votedBy: [],
+				image: imageUrl
+			}).then(response => {
+				return res.status(200).json({
+					message : "Submitted"
+				});
+			}).catch(error => {
+				console.log(error);
+				return res.status(500).json({
+					message : "Error while submitting"
+				});
+			});
+		} catch (error) {
+			return res.status(500).json({
+				message : "Error while submitting"
+			});
+		}
 	}
 };
 

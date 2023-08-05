@@ -32,12 +32,10 @@ app.use(morgan(":method :url Status - :status - :response-time ms :date[web]"));
 
 // Routes Setup
 app.use('/user', user);
+app.use('/leaderboard', leaderboard);
 
 app.use(verifyJWT)
-app.use('/leaderboard', leaderboard);
 app.use('/image', image);
-
-
 
 // App Start
 const PORT = process.env.PORT || 8080;
