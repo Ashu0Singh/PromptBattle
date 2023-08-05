@@ -9,8 +9,9 @@ const cookieParser = require("cookie-parser");
 
 // Routes Import
 const leaderboard = require("./routes/leaderboard.js");
-const user = require('./routes/user.js');
-const image = require('./routes/images.js');
+const user = require("./routes/user.js");
+const image = require("./routes/images.js");
+const poll = require("./routes/polling.js")
 const verifyJWT = require("./middleware/verifyJWT.js");
 
 // Configuration Updates
@@ -29,13 +30,13 @@ app.use(
 );
 app.use(morgan(":method :url Status - :status - :response-time ms :date[web]"));
 
-
 // Routes Setup
-app.use('/user', user);
-app.use('/leaderboard', leaderboard);
+app.use("/user", user);
+app.use("/leaderboard", leaderboard);
 
-app.use(verifyJWT)
-app.use('/image', image);
+app.use(verifyJWT);
+app.use("/image", image);
+app.use("/poll", poll);
 
 // App Start
 const PORT = process.env.PORT || 8080;
