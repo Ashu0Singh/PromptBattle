@@ -2,9 +2,10 @@ import "./Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Wrapper from "../Wrapper/Wrapper";
-import { useState } from "react";
-import axios from "axios";
-import { toast } from "react-hot-toast";
+import { useContext, useState } from "react";
+
+import { register } from "../../util/useFetch";
+import { Context } from "../../util/context";
 
 export default function Register() {
 	const [classNames, setClassName] = useState(["", "", ""]);
@@ -16,22 +17,15 @@ export default function Register() {
 		password: "",
 	});
 
+	const { giveToast } = useContext(Context);
+
 	const handleSubmit = async () => {
 		try {
-			await axios.post(
-				(process.env.REACT_APP_NODE_ENV == "DEVELOPMENT"
-					? process.env.REACT_APP_DEV_URL
-					: process.env.REACT_APP_PRODUCTION_URL)+"/user/register",
-				input
-			).then((response) => {
-				if (response.status == 200)
-					toast.success(response.data.message);
-				else
-					toast.error(response.data.message);
-			});
-		}
-		catch (error) {
-			toast.error("There's has been a problem on our side");
+			const response = await register(input);
+			console.log(response);
+			giveToast(response.status, response.data.message);
+		} catch (error) {
+			giveToast(500, "Internal Server Error");
 		}
 	};
 
@@ -82,7 +76,7 @@ export default function Register() {
 						/>
 						<label htmlFor="floatingCode">Password</label>
 					</div>
-					<div className="link">
+					<div className="link fc-white">
 						Already have an account?{" "}
 						<Link to="/PromptBattle/Login">Login</Link>
 					</div>

@@ -16,13 +16,13 @@ const Image = {
                 n: 4,
                 size: "512x512",
 			});
-			res.status(200).json({
+			return res.status(200).json({
 				message: "Images Generated",
 				images: response.data,
 			});
         } catch (error) {
             console.log(error.response.data);
-			res.status(500).json({ message: "Internal server error" });
+			return res.status(500).json({ message: "Internal server error" });
 		}
 	},
 	async submit(req, res) {

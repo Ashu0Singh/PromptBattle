@@ -6,7 +6,6 @@ import GenerateImg from "./components/Image Generation/ImageGen";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
 import AppContext from "./util/context";
 import Register from "./components/Register/Register";
-import { Toaster } from "react-hot-toast";
 
 function App() {
 	return (
