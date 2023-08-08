@@ -4,7 +4,7 @@ import Login from "./components/Register/Login";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import GenerateImg from "./components/Image Generation/ImageGen";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
-import AppContext from "./util/context";
+
 import Register from "./components/Register/Register";
 
 function App() {
