@@ -60,7 +60,7 @@ const Poll = {
                 );
             });
 
-            return res.status(200).json({ message: "Successfully Votes" });
+            return res.status(200).json({ message: "Successfully Voted" });
         }
         catch (error) {
             console.error(error);
